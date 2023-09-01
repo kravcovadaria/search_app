@@ -35,12 +35,27 @@ class SearchCard extends StatelessWidget {
               data: ThemeData(
                 iconButtonTheme: IconButtonThemeData(
                   style: ButtonStyle(
+                    splashFactory: NoSplash.splashFactory,
                     iconSize: MaterialStateProperty.all<double>(24.r),
                     iconColor: MaterialStateProperty.all<Color>(
-                      Theme.of(context).primaryColor,
+                      repo.favourite
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).disabledColor,
                     ),
+                    overlayColor: MaterialStateProperty.all<Color>(
+                        Colors.black.withOpacity(0.05)),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
-                        const BeveledRectangleBorder()),
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                        side: BorderSide(
+                          width: 2.r,
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.transparent,
+                    ),
                     maximumSize: MaterialStateProperty.all<Size>(
                       Size(44.r, 44.r),
                     ),
@@ -48,11 +63,8 @@ class SearchCard extends StatelessWidget {
                 ),
               ),
               child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   AppIcons.favorite_active,
-                  color: repo.favourite
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).disabledColor,
                 ),
                 onPressed: onFavTap,
               ),

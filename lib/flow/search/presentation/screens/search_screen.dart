@@ -30,8 +30,7 @@ class SearchScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         appBar: AppNavBar(
           title: 'Github repos list',
           rightIcon: AppIcons.favorite_active,
@@ -45,7 +44,8 @@ class SearchScreenView extends StatelessWidget {
             );
           },
         ),
-        body: BlocBuilder<SearchCubit, SearchState>(
+        body: SafeArea(
+          child: BlocBuilder<SearchCubit, SearchState>(
           builder: (context, state) {
             return Stack(
               alignment: Alignment.center,

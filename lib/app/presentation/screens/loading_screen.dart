@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:search_app/app/presentation/logic/app_cubit.dart';
@@ -11,8 +12,9 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: _LoadingView(),
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      body: const _LoadingView(),
     );
   }
 }
@@ -31,16 +33,22 @@ class _LoadingView extends StatelessWidget {
           ),
         );
       },
-      child: Center(
+      child: SizedBox(
+        width: double.infinity,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'Search app',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             SizedBox(
               height: 16.r,
             ),
-            CupertinoActivityIndicator(radius: 11.r),
+            CupertinoActivityIndicator(
+              radius: 11.r,
+              color: Theme.of(context).progressIndicatorTheme.color,
+            ),
           ],
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,16 +29,25 @@ class SearchApp extends StatelessWidget {
       create: (_) => AppCubit()..initLocalSettings(),
       child: MaterialApp(
         title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        color: appColors.main,
         theme: ThemeData(
           scaffoldBackgroundColor: appColors.main,
           primaryColor: appColors.primaryAccent,
+          hoverColor: appColors.secondaryAccent,
           disabledColor: appColors.placeholderText,
           cardColor: appColors.layer,
           shadowColor: appColors.shadow,
+          progressIndicatorTheme: ProgressIndicatorThemeData(
+            color: appColors.spinner,
+          ),
           useMaterial3: true,
           textTheme: TextTheme(
             bodyMedium: bodyStyle.copyWith(
               color: appColors.primaryText,
+            ),
+            bodySmall: bodyStyle.copyWith(
+              color: appColors.layer,
             ),
             headlineMedium: mainStyle.copyWith(
               color: appColors.primaryText,
@@ -56,12 +64,14 @@ class SearchApp extends StatelessWidget {
               color: appColors.primaryText,
             ),
             backgroundColor: appColors.main,
+            surfaceTintColor: Colors.transparent,
             centerTitle: true,
             elevation: 0,
             shadowColor: appColors.shadow,
           ),
           iconButtonTheme: IconButtonThemeData(
             style: ButtonStyle(
+              splashFactory: NoSplash.splashFactory,
               iconColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
@@ -69,6 +79,9 @@ class SearchApp extends StatelessWidget {
                   }
                   return appColors.white;
                 },
+              ),
+              overlayColor: MaterialStateProperty.all<Color>(
+                Colors.transparent,
               ),
               backgroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
@@ -85,11 +98,10 @@ class SearchApp extends StatelessWidget {
                   return RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
                     side: BorderSide(
-                        color: (states.contains(MaterialState.pressed))
-                            ? appColors.secondaryAccent
-                            : (states.contains(MaterialState.disabled))
-                                ? appColors.placeholderText
-                                : Colors.transparent),
+                        width: 2.r,
+                        color: (states.contains(MaterialState.disabled))
+                            ? appColors.placeholderText
+                            : Colors.transparent),
                   );
                 },
               ),

@@ -28,21 +28,22 @@ class FavouritesScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppNavBar(
-          title: 'Favorite repos list',
-          leftIcon: AppIcons.left,
-          leftButtonTap: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        body: BlocBuilder<FavouritesCubit, FavouritesState>(
+    return Scaffold(
+      appBar: AppNavBar(
+        title: 'Favorite repos list',
+        leftIcon: AppIcons.left,
+        leftButtonTap: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      body: SafeArea(
+        child: BlocBuilder<FavouritesCubit, FavouritesState>(
           builder: (context, state) {
             return Stack(
               alignment: Alignment.center,
               children: [
-                if (state.repos.isEmpty)
+                if (state.repos.isEmpty &&
+                    state.status == FavouritesStatus.success)
                   Text(
                     'You have no favorites.'
                     '\nClick on star while searching to add first favorite',
@@ -50,7 +51,6 @@ class FavouritesScreenView extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ListView(
-                  physics: const BouncingScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 16.r,
                     vertical: 24.r,

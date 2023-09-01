@@ -18,6 +18,7 @@ class AppCubit extends Cubit<AppState> {
       if (!Hive.isBoxOpen('favourites')) {
         await Hive.openBox<GithubRepo>('favourites');
       }
+      await Future.delayed(const Duration(milliseconds: 1500));
       emit(AppState(SettingsStates.ok));
     } catch (e) {
       emit(AppState(SettingsStates.error));
