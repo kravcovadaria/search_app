@@ -8,6 +8,7 @@ class SearchField extends AppInputField {
     TextEditingController? controller,
     bool enabled = true,
     String text = '',
+    String hint = '',
     Function(String)? onSubmitted,
     Function(String)? onPrefixPressed,
     Function(String)? onSuffixPressed,
@@ -22,6 +23,7 @@ class SearchField extends AppInputField {
           onSuffixPressed: onSuffixPressed,
           textInputAction: TextInputAction.search,
           counterText: '',
+          hint: hint,
           text: text,
         );
 }

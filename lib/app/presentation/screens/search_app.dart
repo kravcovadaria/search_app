@@ -113,6 +113,8 @@ class SearchApp extends StatelessWidget {
           ),
           textSelectionTheme: TextSelectionThemeData(
             cursorColor: appColors.primaryText,
+            selectionColor: appColors.primaryAccent.withOpacity(0.3),
+            selectionHandleColor: appColors.primaryAccent,
           ),
           inputDecorationTheme: InputDecorationTheme(
             border: OutlineInputBorder(

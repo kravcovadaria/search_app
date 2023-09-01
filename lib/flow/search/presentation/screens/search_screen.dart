@@ -76,6 +76,7 @@ class SearchScreenView extends StatelessWidget {
                   children: [
                     SearchField(
                       text: state.searchString,
+                      hint: 'Search',
                       onSubmitted: (String value) =>
                           _submitSearchString(context, value),
                       onPrefixPressed: (String value) =>
