@@ -10,11 +10,9 @@ class AppConfig {
 
   static String get baseUrl => dotenv.env['BASE_URL'] ?? '';
 
-  Future<void> loadDev() async {
-    await dotenv.load(fileName: '.env.dev');
-  }
+  static Future<void> init() => shared._loadEnv();
 
-  Future<void> loadProd() async {
-    await dotenv.load(fileName: '.env.prod');
+  Future<void> _loadEnv() async {
+    await dotenv.load(fileName: '.env');
   }
 }

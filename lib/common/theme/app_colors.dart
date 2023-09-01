@@ -7,6 +7,8 @@ class AppColors {
   final Color secondaryAccent = const Color(0xFFE5EDFF);
   final Color primaryText = const Color(0xFF211814);
   final Color placeholderText = const Color(0xFFBFBFBF);
+  final Color white = const Color(0xFFFFFFFF);
+  final Color shadow = const Color(0x08000000);
 
   const AppColors();
 }

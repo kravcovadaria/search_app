@@ -19,7 +19,7 @@ class _ISearchDataSource implements ISearchDataSource {
   String? baseUrl;
 
   @override
-  Future<List<GithubRepo>> searchRepos(
+  Future<GitSearchResult> searchRepos(
     String searchString,
     int perPage,
   ) async {
@@ -31,11 +31,10 @@ class _ISearchDataSource implements ISearchDataSource {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<GithubRepo>>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<GitSearchResult>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
-      contentType: 'application/x-www-form-urlencoded',
     )
             .compose(
               _dio.options,
@@ -48,9 +47,7 @@ class _ISearchDataSource implements ISearchDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => GithubRepo.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = GitSearchResult.fromJson(_result.data!);
     return value;
   }
 
