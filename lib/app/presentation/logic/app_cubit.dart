@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:search_app/app/data/models/github_repo.dart';
+import 'package:search_app/flow/search/data/models/github_repo.dart';
 import 'package:search_app/app/presentation/logic/app_state.dart';
 import 'package:search_app/common/app_config.dart';
 

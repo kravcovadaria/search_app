@@ -1,4 +1,4 @@
-import 'package:search_app/app/data/models/github_repo.dart';
+import 'package:search_app/flow/search/data/models/github_repo.dart';
 
 enum FavouritesStatus { initial, loading, success, failure }
 

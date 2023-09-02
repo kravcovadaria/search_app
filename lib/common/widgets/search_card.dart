@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:search_app/app/data/models/github_repo.dart';
+import 'package:search_app/flow/search/data/models/github_repo.dart';
 import 'package:search_app/common/theme/app_icons.dart';
 
 class SearchCard extends StatelessWidget {
@@ -21,16 +21,11 @@ class SearchCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: Padding(
-        padding: EdgeInsets.only(
-          left: 16.r,
-          right: 16.r,
-          top: 5.r,
-          bottom: 6.r,
-        ),
+        padding: EdgeInsets.fromLTRB(16.r, 5.r, 16.r, 6.r),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(repo.name),
+            Text(repo.name, overflow: TextOverflow.ellipsis, maxLines: 1),
             Theme(
               data: ThemeData(
                 iconButtonTheme: IconButtonThemeData(

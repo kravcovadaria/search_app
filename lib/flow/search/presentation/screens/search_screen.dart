@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:search_app/app/data/datasources/local_datasource.dart';
 import 'package:search_app/common/theme/app_icons.dart';
 import 'package:search_app/common/widgets/app_bar.dart';
+import 'package:search_app/common/widgets/app_loading_indicator.dart';
 import 'package:search_app/common/widgets/search_card.dart';
 import 'package:search_app/flow/search/domain/repositories/search_repository.dart';
 import 'package:search_app/flow/search/presentation/logic/search/search_cubit.dart';
@@ -18,7 +18,7 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SearchCubit(
-        SearchRepository(LocalDatasource()),
+        context.read<SearchRepository>(),
       )..clear(),
       child: const SearchScreenView(),
     );
@@ -68,7 +68,6 @@ class SearchScreenView extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ListView(
-                  physics: const BouncingScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 16.r,
                     vertical: 24.r,
@@ -87,7 +86,7 @@ class SearchScreenView extends StatelessWidget {
                     if (state.status == SearchStatus.loading)
                       Padding(
                         padding: EdgeInsets.only(top: 24.r),
-                        child: CupertinoActivityIndicator(radius: 11.r),
+                        child: const AppLoadingIndicator(),
                       ),
                     if (state.status == SearchStatus.success)
                       Padding(

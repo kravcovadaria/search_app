@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:search_app/app/presentation/screens/search_app.dart';
+import 'package:search_app/app/presentation/widgets/search_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

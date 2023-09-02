@@ -1,47 +1,43 @@
-import 'package:dio/dio.dart';
-import 'package:search_app/app/data/datasources/local_datasource.dart';
-import 'package:search_app/app/data/models/github_repo.dart';
+import 'package:search_app/common/app_config.dart';
+import 'package:search_app/flow/search/data/datasources/favorites_datasource.dart';
+import 'package:search_app/flow/search/data/datasources/history_datasource.dart';
+import 'package:search_app/flow/search/data/models/github_repo.dart';
 import 'package:search_app/flow/search/data/datasources/search_datasource.dart';
 import 'package:search_app/flow/search/data/models/git_search_result.dart';
-import 'package:search_app/management/network/api_manager.dart';
+import 'package:search_app/flow/search/domain/repositories/favourites_repository.dart';
 
-abstract class ISearchRepository {
-  Future<List<GithubRepo>> searchRepos({
-    required String searchString,
-    required int perPage,
-  });
-
-  Future<void> toggleFavs(GithubRepo repo);
-
-  Future<List<GithubRepo>> getFavourites();
+abstract class ISearchRepository implements IFavouritesRepository {
+  Future<List<GithubRepo>> searchRepos(String searchString);
 }
 
 class SearchRepository implements ISearchRepository {
-  SearchRepository(this.localDatasource);
+  SearchRepository({
+    required this.favouritesDatasource,
+    required this.historyDatasource,
+    required this.searchDataSource,
+  });
 
-  final LocalDatasource localDatasource;
+  final IFavouritesDatasource favouritesDatasource;
+  final IHistoryDatasource historyDatasource;
+  final ISearchDataSource searchDataSource;
 
   @override
-  Future<List<GithubRepo>> searchRepos({
-    required String searchString,
-    required int perPage,
-  }) async {
+  Future<List<GithubRepo>> searchRepos(String searchString) async {
+    if (searchString.isEmpty) return historyDatasource.getHistory();
 
-    if(searchString.isEmpty) return localDatasource.getHistory();
-
-    Dio dio = ApiManager().getDio();
-    GitSearchResult result = await ISearchDataSource(dio).searchRepos(
+    GitSearchResult result = await searchDataSource.searchRepos(
       searchString,
-      perPage,
+      AppConfig.searchSize,
     );
-    localDatasource.updateHistory(result.items);
+    historyDatasource.updateHistory(result.items);
     return List<GithubRepo>.from(result.items);
   }
 
   @override
-  Future<GithubRepo> toggleFavs(GithubRepo repo) =>
-      localDatasource.toggleFavs(repo);
+  Future<List<GithubRepo>> getFavourites() =>
+      favouritesDatasource.getFavourites();
 
   @override
-  Future<List<GithubRepo>> getFavourites() => localDatasource.getFavourites();
+  Future<GithubRepo> toggleFavs(GithubRepo repo) =>
+      favouritesDatasource.toggleFavs(repo);
 }

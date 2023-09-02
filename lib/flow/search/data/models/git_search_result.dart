@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:search_app/app/data/models/github_repo.dart';
+import 'package:search_app/flow/search/data/models/github_repo.dart';
 
 part 'git_search_result.freezed.dart';
 part 'git_search_result.g.dart';

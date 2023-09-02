@@ -8,7 +8,9 @@ class AppConfig {
 
   static const appName = 'Search app';
 
-  static String get baseUrl => dotenv.env['BASE_URL'] ?? '';
+  static String get baseUrl => dotenv.env['BASE_URL']!;
+
+  static int get searchSize => int.parse(dotenv.env['SEARCH_SIZE']!);
 
   static Future<void> init() => shared._loadEnv();
 
