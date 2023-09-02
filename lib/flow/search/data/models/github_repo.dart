@@ -29,11 +29,11 @@ class GithubRepo {
       );
 
   factory GithubRepo.fromJson(Map<String, dynamic> json) =>
-      GithubRepo(url: json['url'] as String, name: json['name'] as String);
+      GithubRepo(url: json['html_url'] as String, name: json['full_name'] as String);
 
   Map<String, dynamic> toJson() => {
-        'url': url,
-        'name': name,
+        'html_url': url,
+        'full_name': name,
         'favourite': favourite,
       };
 }
