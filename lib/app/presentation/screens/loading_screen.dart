@@ -43,7 +43,7 @@ class _LoadingView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 16.r),
-            const AppLoadingIndicator(),
+            const AppLoadingIndicator(darkBackground: true),
           ],
         ),
       ),
