@@ -41,6 +41,9 @@ class FavouritesScreenView extends StatelessWidget {
           builder: (context, state) {
             return MessageBuilder(
               messageBuilder: () {
+                if(state.status == FavouritesStatus.failure) {
+                  return AppStrings.somethingWrongMessage;
+                }
                 if (state.repos.isEmpty &&
                     state.status == FavouritesStatus.success) {
                   return AppStrings.noFavsMessage;

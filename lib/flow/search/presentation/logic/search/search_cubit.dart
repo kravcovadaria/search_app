@@ -15,6 +15,8 @@ class SearchCubit extends Cubit<SearchState> {
   void clear() => fetch('');
 
   Future<void> fetch(String searchString) async {
+    if(state.status == SearchStatus.loading) return;
+
     emit(state.copyWith(
       searchString: searchString,
       status: SearchStatus.loading,

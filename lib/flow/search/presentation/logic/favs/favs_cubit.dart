@@ -12,6 +12,8 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   final IFavouritesRepository repository;
 
   Future<void> fetch() async {
+    if(state.status == FavouritesStatus.loading) return;
+
     emit(state.copyWith(
       status: FavouritesStatus.loading,
     ));

@@ -51,6 +51,9 @@ class SearchScreenView extends StatelessWidget {
           builder: (context, state) {
             return MessageBuilder(
               messageBuilder: () {
+                if(state.status == SearchStatus.failure) {
+                  return AppStrings.somethingWrongMessage;
+                }
                 if (state.searchString.isEmpty &&
                     state.repos.isEmpty &&
                     state.status == SearchStatus.success) {
