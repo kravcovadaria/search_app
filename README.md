@@ -1,16 +1,15 @@
-# search_app
+# Search App
 
-"A new Flutter project."
+Test task made by Kravtsova Daria
 
-## Getting Started
+## Prerequisites:
 
-This project is a starting point for a Flutter application.
+*    Output 15 search results.
+*    Add ability to add repository to favorite list
+*    Add the ability to view the search history of repositories in subsequent runs of the application.
+*    Add possibility to see the list of favorite repositories at subsequent runs of the application
+*    Add possibility to remove the repository from the favorites list
+*    Show previously favorited repositories in search results list
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Follow the provided UI/UX:
+[Figma UI/UX](https://www.figma.com/file/iuGFkvS9fSzClOvPVdKELI/Flutter-Test-Screens?node-id=2-2490&t=HZ0sQRJno9S5qhDh-0)
