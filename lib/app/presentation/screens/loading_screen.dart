@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:search_app/app/presentation/logic/app_cubit.dart';
 import 'package:search_app/app/presentation/logic/app_state.dart';
+import 'package:search_app/common/app_strings.dart';
 import 'package:search_app/common/widgets/app_loading_indicator.dart';
 import 'package:search_app/flow/search/presentation/screens/search_screen.dart';
 
@@ -38,7 +38,7 @@ class _LoadingView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Search app',
+              AppStrings.appName,
               style: Theme.of(context).textTheme.bodySmall,
               textAlign: TextAlign.center,
             ),

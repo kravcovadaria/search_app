@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:search_app/common/app_strings.dart';
 import 'package:search_app/common/theme/app_icons.dart';
 import 'package:search_app/common/widgets/app_bar.dart';
 import 'package:search_app/common/widgets/app_loading_indicator.dart';
@@ -33,7 +34,7 @@ class SearchScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppNavBar(
-        title: 'Github repos list',
+        title: AppStrings.appBarSearch,
         rightIcon: AppIcons.favorite_active,
         rightButtonTap: () {
           Navigator.of(context).push(
@@ -53,13 +54,11 @@ class SearchScreenView extends StatelessWidget {
                 if (state.searchString.isEmpty &&
                     state.repos.isEmpty &&
                     state.status == SearchStatus.success) {
-                  return 'You have empty history.\n'
-                      'Click on search to start journey!';
+                  return AppStrings.noSearchHistoryMessage;
                 }
                 if (state.repos.isEmpty &&
                     state.status == SearchStatus.success) {
-                  return 'Nothing was find for your search.\n'
-                      'Please check the spelling';
+                  return AppStrings.noSearchResultsMessage;
                 }
                 return '';
               },
@@ -71,7 +70,7 @@ class SearchScreenView extends StatelessWidget {
                 children: [
                   SearchField(
                     text: state.searchString,
-                    hint: 'Search',
+                    hint: AppStrings.search,
                     onSubmitted: (String value) =>
                         _submitSearchString(context, value),
                     onPrefixPressed: (String value) =>
@@ -92,8 +91,8 @@ class SearchScreenView extends StatelessWidget {
                       ),
                       child: Text(
                         state.searchString.isEmpty
-                            ? 'Search history'
-                            : 'What we found',
+                            ? AppStrings.searchHistory
+                            : AppStrings.searchResults,
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                     ),

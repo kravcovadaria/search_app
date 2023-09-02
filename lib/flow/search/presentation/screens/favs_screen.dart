@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:search_app/common/app_strings.dart';
 import 'package:search_app/common/theme/app_icons.dart';
 import 'package:search_app/common/widgets/app_bar.dart';
 import 'package:search_app/common/widgets/app_loading_indicator.dart';
@@ -31,7 +32,7 @@ class FavouritesScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppNavBar(
-        title: 'Favorite repos list',
+        title: AppStrings.appBarFavs,
         leftIcon: AppIcons.left,
         leftButtonTap: Navigator.of(context).pop,
       ),
@@ -42,8 +43,7 @@ class FavouritesScreenView extends StatelessWidget {
               messageBuilder: () {
                 if (state.repos.isEmpty &&
                     state.status == FavouritesStatus.success) {
-                  return 'You have no favorites.\n'
-                      'Click on star while searching to add first favorite';
+                  return AppStrings.noFavsMessage;
                 }
                 return '';
               },
