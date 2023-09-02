@@ -26,43 +26,41 @@ class SearchCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(repo.name, overflow: TextOverflow.ellipsis, maxLines: 1),
-            Theme(
-              data: ThemeData(
-                iconButtonTheme: IconButtonThemeData(
-                  style: ButtonStyle(
-                    splashFactory: NoSplash.splashFactory,
-                    iconSize: MaterialStateProperty.all<double>(24.r),
-                    iconColor: MaterialStateProperty.all<Color>(
-                      repo.favourite
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).disabledColor,
-                    ),
-                    overlayColor: MaterialStateProperty.all<Color>(
-                        Colors.black.withOpacity(0.05)),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                        side: BorderSide(
-                          width: 2.r,
-                          color: Colors.transparent,
-                        ),
-                      ),
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      Colors.transparent,
-                    ),
-                    maximumSize: MaterialStateProperty.all<Size>(
-                      Size(44.r, 44.r),
+            IconButton(
+              icon: Icon(
+                AppIcons.favorite_active,
+                size: 24.r,
+                color: repo.favourite
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).disabledColor,
+              ),
+              style: ButtonStyle(
+                splashFactory: NoSplash.splashFactory,
+                iconSize: MaterialStateProperty.all<double>(24.r),
+                iconColor: MaterialStateProperty.all<Color>(
+                  repo.favourite
+                      ? Theme.of(context).primaryColor
+                      : Theme.of(context).disabledColor,
+                ),
+                overlayColor: MaterialStateProperty.all<Color>(
+                    Colors.black.withOpacity(0.05)),
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    side: BorderSide(
+                      width: 2.r,
+                      color: Colors.transparent,
                     ),
                   ),
                 ),
-              ),
-              child: IconButton(
-                icon: const Icon(
-                  AppIcons.favorite_active,
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Colors.transparent,
                 ),
-                onPressed: onFavTap,
+                maximumSize: MaterialStateProperty.all<Size>(
+                  Size(44.r, 44.r),
+                ),
               ),
+              onPressed: onFavTap,
             ),
           ],
         ),
