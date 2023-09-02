@@ -8,6 +8,7 @@ import 'package:search_app/common/widgets/app_loading_indicator.dart';
 import 'package:search_app/common/widgets/search_card.dart';
 import 'package:search_app/flow/search/domain/repositories/favourites_repository.dart';
 import 'package:search_app/flow/search/presentation/logic/favs/favs_cubit.dart';
+import 'package:search_app/flow/search/presentation/widgets/message_builder.dart';
 
 class FavouritesScreen extends StatelessWidget {
   const FavouritesScreen({Key? key}) : super(key: key);
@@ -37,39 +38,35 @@ class FavouritesScreenView extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<FavouritesCubit, FavouritesState>(
           builder: (context, state) {
-            return Stack(
-              alignment: Alignment.center,
-              children: [
+            return MessageBuilder(
+              messageBuilder: () {
                 if (state.repos.isEmpty &&
-                    state.status == FavouritesStatus.success)
-                  Text(
-                    'You have no favorites.'
-                    '\nClick on star while searching to add first favorite',
-                    style: Theme.of(context).textTheme.displaySmall,
-                    textAlign: TextAlign.center,
-                  ),
-                ListView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.r,
-                    vertical: 24.r,
-                  ),
-                  children: [
-                    if (state.status == FavouritesStatus.loading)
-                      const AppLoadingIndicator(),
-                    if (state.status == FavouritesStatus.success)
-                      for (final item in state.repos)
-                        Padding(
-                          padding: EdgeInsets.only(top: 8.r),
-                          child: SearchCard(
-                            repo: item,
-                            onFavTap: () => context
-                                .read<FavouritesCubit>()
-                                .toggleFavs(item),
-                          ),
-                        ),
-                  ],
+                    state.status == FavouritesStatus.success) {
+                  return 'You have no favorites.\n'
+                      'Click on star while searching to add first favorite';
+                }
+                return '';
+              },
+              child: ListView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.r,
+                  vertical: 24.r,
                 ),
-              ],
+                children: [
+                  if (state.status == FavouritesStatus.loading)
+                    const AppLoadingIndicator(),
+                  if (state.status == FavouritesStatus.success)
+                    for (final item in state.repos)
+                      Padding(
+                        padding: EdgeInsets.only(top: 8.r),
+                        child: SearchCard(
+                          repo: item,
+                          onFavTap: () =>
+                              context.read<FavouritesCubit>().toggleFavs(item),
+                        ),
+                      ),
+                ],
+              ),
             );
           },
         ),
