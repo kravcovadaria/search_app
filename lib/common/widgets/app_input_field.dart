@@ -115,7 +115,7 @@ class AppInputFieldState extends State<AppInputField> {
                 onPressed: () =>
                     widget.onPrefixPressed?.call(controller.value.text),
               ),
-        suffixIcon: widget.suffixIcon == null
+        suffixIcon: widget.suffixIcon == null || !focus.hasFocus
             ? null
             : widget.enabled
                 ? IconButton(
